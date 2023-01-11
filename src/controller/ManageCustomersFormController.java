@@ -189,10 +189,13 @@ public class ManageCustomersFormController {
 
 
     boolean existCustomer(String id) throws SQLException, ClassNotFoundException {
-        Connection connection = DBConnection.getDbConnection().getConnection();
-        PreparedStatement pstm = connection.prepareStatement("SELECT id FROM Customer WHERE id=?");
-        pstm.setString(1, id);
-        return pstm.executeQuery().next();
+//        Connection connection = DBConnection.getDbConnection().getConnection();
+//        PreparedStatement pstm = connection.prepareStatement("SELECT id FROM Customer WHERE id=?");
+//        pstm.setString(1, id);
+//        return pstm.executeQuery().next();
+
+        CustomerDAOImpl customerDAO=new CustomerDAOImpl();
+        return customerDAO.existCustomer(id);
     }
 
 
@@ -203,10 +206,9 @@ public class ManageCustomersFormController {
             if (!existCustomer(id)) {
                 new Alert(Alert.AlertType.ERROR, "There is no such customer associated with the id " + id).show();
             }
-            Connection connection = DBConnection.getDbConnection().getConnection();
-            PreparedStatement pstm = connection.prepareStatement("DELETE FROM Customer WHERE id=?");
-            pstm.setString(1, id);
-            pstm.executeUpdate();
+
+            CustomerDAOImpl customerDAO=new CustomerDAOImpl();
+            customerDAO.DeleteCustomer(id);
 
             tblCustomers.getItems().remove(tblCustomers.getSelectionModel().getSelectedItem());
             tblCustomers.getSelectionModel().clearSelection();

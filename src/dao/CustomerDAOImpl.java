@@ -43,4 +43,20 @@ public class CustomerDAOImpl {
         return pstm.executeUpdate()>0;
     }
 
+
+    public boolean existCustomer(String id) throws SQLException, ClassNotFoundException {
+        Connection connection = DBConnection.getDbConnection().getConnection();
+        PreparedStatement pstm = connection.prepareStatement("SELECT id FROM Customer WHERE id=?");
+        pstm.setString(1, id);
+        return pstm.executeQuery().next();
+    }
+
+    public boolean DeleteCustomer(String id) throws SQLException, ClassNotFoundException {
+        Connection connection = DBConnection.getDbConnection().getConnection();
+        PreparedStatement pstm = connection.prepareStatement("DELETE FROM Customer WHERE id=?");
+        pstm.setString(1, id);
+        return pstm.executeUpdate()>0;
+    }
+
+
 }
