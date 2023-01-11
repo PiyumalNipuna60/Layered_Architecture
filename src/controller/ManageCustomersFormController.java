@@ -223,21 +223,24 @@ public class ManageCustomersFormController {
 
     private String generateNewId() {
         try {
-            Connection connection = DBConnection.getDbConnection().getConnection();
-            ResultSet rst = connection.createStatement().executeQuery("SELECT id FROM Customer ORDER BY id DESC LIMIT 1;");
-            if (rst.next()) {
-                String id = rst.getString("id");
-                int newCustomerId = Integer.parseInt(id.replace("C00-", "")) + 1;
-                return String.format("C00-%03d", newCustomerId);
-            } else {
-                return "C00-001";
-            }
+//            Connection connection = DBConnection.getDbConnection().getConnection();
+//            ResultSet rst = connection.createStatement().executeQuery("SELECT id FROM Customer ORDER BY id DESC LIMIT 1;");
+//            if (rst.next()) {
+//                String id = rst.getString("id");
+//                int newCustomerId = Integer.parseInt(id.replace("C00-", "")) + 1;
+//                return String.format("C00-%03d", newCustomerId);
+//            } else {
+//                return "C00-001";
+//            }
+
+            CustomerDAOImpl customerDAO=new CustomerDAOImpl();
+            return customerDAO.generateNewId();
+
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, "Failed to generate a new id " + e.getMessage()).show();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-
 
         if (tblCustomers.getItems().isEmpty()) {
             return "C00-001";
