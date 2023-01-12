@@ -196,6 +196,9 @@ public class ManageItemsFormController {
 //                pstm.setBigDecimal(3, unitPrice);
 //                pstm.setInt(4, qtyOnHand);
 //                pstm.executeUpdate();
+
+                ItemDAOImpl itemDAO=new ItemDAOImpl();
+                itemDAO.saveCustomer(new ItemDTO(code,description,unitPrice,qtyOnHand));
                 tblItems.getItems().add(new ItemTM(code, description, unitPrice, qtyOnHand));
 
             } catch (SQLException e) {
@@ -210,13 +213,16 @@ public class ManageItemsFormController {
                     new Alert(Alert.AlertType.ERROR, "There is no such item associated with the id " + code).show();
                 }
                 /*Update Item*/
-                Connection connection = DBConnection.getDbConnection().getConnection();
-                PreparedStatement pstm = connection.prepareStatement("UPDATE Item SET description=?, unitPrice=?, qtyOnHand=? WHERE code=?");
-                pstm.setString(1, description);
-                pstm.setBigDecimal(2, unitPrice);
-                pstm.setInt(3, qtyOnHand);
-                pstm.setString(4, code);
-                pstm.executeUpdate();
+//                Connection connection = DBConnection.getDbConnection().getConnection();
+//                PreparedStatement pstm = connection.prepareStatement("UPDATE Item SET description=?, unitPrice=?, qtyOnHand=? WHERE code=?");
+//                pstm.setString(1, description);
+//                pstm.setBigDecimal(2, unitPrice);
+//                pstm.setInt(3, qtyOnHand);
+//                pstm.setString(4, code);
+//                pstm.executeUpdate();
+
+                ItemDAOImpl itemDAO = new ItemDAOImpl();
+                itemDAO.updateCustomer(new ItemDTO(description,unitPrice,qtyOnHand,code));
 
                 ItemTM selectedItem = tblItems.getSelectionModel().getSelectedItem();
                 selectedItem.setDescription(description);
