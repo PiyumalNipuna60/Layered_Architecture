@@ -54,4 +54,11 @@ public class ItemDAOImpl {
         pstm.setString(4, dto.getCode());
         return pstm.executeUpdate()>0;
     }
+
+    public boolean existCustomer(String code) throws SQLException, ClassNotFoundException {
+        Connection connection = DBConnection.getDbConnection().getConnection();
+        PreparedStatement pstm = connection.prepareStatement("SELECT code FROM Item WHERE code=?");
+        pstm.setString(1, code);
+        return pstm.executeQuery().next();
+    }
 }
