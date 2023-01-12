@@ -81,7 +81,6 @@ public class ManageItemsFormController {
 //            while (rst.next()) {
 //                tblItems.getItems().add(new ItemTM(rst.getString("code"), rst.getString("description"), rst.getBigDecimal("unitPrice"), rst.getInt("qtyOnHand")));
 //            }
-
             ItemDAOImpl itemDAO=new ItemDAOImpl();
             ArrayList<ItemDTO> allItem = itemDAO.getAllItem();
 
@@ -144,10 +143,13 @@ public class ManageItemsFormController {
             if (!existItem(code)) {
                 new Alert(Alert.AlertType.ERROR, "There is no such item associated with the id " + code).show();
             }
-            Connection connection = DBConnection.getDbConnection().getConnection();
-            PreparedStatement pstm = connection.prepareStatement("DELETE FROM Item WHERE code=?");
-            pstm.setString(1, code);
-            pstm.executeUpdate();
+//            Connection connection = DBConnection.getDbConnection().getConnection();
+//            PreparedStatement pstm = connection.prepareStatement("DELETE FROM Item WHERE code=?");
+//            pstm.setString(1, code);
+//            pstm.executeUpdate();
+
+            ItemDAOImpl itemDAO=new ItemDAOImpl();
+            itemDAO.DeleteCustomer(code);
 
             tblItems.getItems().remove(tblItems.getSelectionModel().getSelectedItem());
             tblItems.getSelectionModel().clearSelection();
@@ -187,13 +189,13 @@ public class ManageItemsFormController {
                     new Alert(Alert.AlertType.ERROR, code + " already exists").show();
                 }
                 //Save Item
-                Connection connection = DBConnection.getDbConnection().getConnection();
-                PreparedStatement pstm = connection.prepareStatement("INSERT INTO Item (code, description, unitPrice, qtyOnHand) VALUES (?,?,?,?)");
-                pstm.setString(1, code);
-                pstm.setString(2, description);
-                pstm.setBigDecimal(3, unitPrice);
-                pstm.setInt(4, qtyOnHand);
-                pstm.executeUpdate();
+//                Connection connection = DBConnection.getDbConnection().getConnection();
+//                PreparedStatement pstm = connection.prepareStatement("INSERT INTO Item (code, description, unitPrice, qtyOnHand) VALUES (?,?,?,?)");
+//                pstm.setString(1, code);
+//                pstm.setString(2, description);
+//                pstm.setBigDecimal(3, unitPrice);
+//                pstm.setInt(4, qtyOnHand);
+//                pstm.executeUpdate();
                 tblItems.getItems().add(new ItemTM(code, description, unitPrice, qtyOnHand));
 
             } catch (SQLException e) {

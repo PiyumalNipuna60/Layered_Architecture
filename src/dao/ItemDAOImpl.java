@@ -4,10 +4,7 @@ import db.DBConnection;
 import model.ItemDTO;
 import view.tdm.ItemTM;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class ItemDAOImpl {
@@ -29,5 +26,12 @@ public class ItemDAOImpl {
             ));
         }
         return allItem;
+    }
+
+    public boolean DeleteCustomer(String code) throws SQLException, ClassNotFoundException {
+        Connection connection = DBConnection.getDbConnection().getConnection();
+        PreparedStatement pstm = connection.prepareStatement("DELETE FROM Item WHERE code=?");
+        pstm.setString(1, code);
+        return pstm.executeUpdate()>0;
     }
 }
