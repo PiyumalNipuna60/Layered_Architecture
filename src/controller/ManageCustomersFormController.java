@@ -153,7 +153,8 @@ public class ManageCustomersFormController {
 
                 tblCustomers.getItems().add(new CustomerTM(id, name, address));
             } catch (SQLException e) {
-                new Alert(Alert.AlertType.ERROR, "Failed to save the customer " + e.getMessage()).show();
+//                new Alert(Alert.AlertType.ERROR, "Failed to save the customer " + e.getMessage()).show();
+                System.out.println(e);
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
