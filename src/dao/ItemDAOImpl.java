@@ -28,14 +28,14 @@ public class ItemDAOImpl {
         return allItem;
     }
 
-    public boolean DeleteCustomer(String code) throws SQLException, ClassNotFoundException {
+    public boolean DeleteItem(String code) throws SQLException, ClassNotFoundException {
         Connection connection = DBConnection.getDbConnection().getConnection();
         PreparedStatement pstm = connection.prepareStatement("DELETE FROM Item WHERE code=?");
         pstm.setString(1, code);
         return pstm.executeUpdate()>0;
     }
 
-    public boolean saveCustomer(ItemDTO dto) throws SQLException, ClassNotFoundException {
+    public boolean saveItem(ItemDTO dto) throws SQLException, ClassNotFoundException {
         Connection connection = DBConnection.getDbConnection().getConnection();
         PreparedStatement pstm = connection.prepareStatement("INSERT INTO Item (code, description, unitPrice, qtyOnHand) VALUES (?,?,?,?)");
         pstm.setString(1, dto.getCode());
@@ -45,7 +45,7 @@ public class ItemDAOImpl {
         return pstm.executeUpdate()>0;
     }
 
-    public boolean updateCustomer(ItemDTO dto) throws SQLException, ClassNotFoundException {
+    public boolean updateItem(ItemDTO dto) throws SQLException, ClassNotFoundException {
         Connection connection = DBConnection.getDbConnection().getConnection();
         PreparedStatement pstm = connection.prepareStatement("UPDATE Item SET description=?, unitPrice=?, qtyOnHand=? WHERE code=?");
         pstm.setString(1, dto.getDescription());
@@ -55,7 +55,7 @@ public class ItemDAOImpl {
         return pstm.executeUpdate()>0;
     }
 
-    public boolean existCustomer(String code) throws SQLException, ClassNotFoundException {
+    public boolean existItem(String code) throws SQLException, ClassNotFoundException {
         Connection connection = DBConnection.getDbConnection().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT code FROM Item WHERE code=?");
         pstm.setString(1, code);

@@ -149,7 +149,7 @@ public class ManageItemsFormController {
 //            pstm.executeUpdate();
 
             ItemDAOImpl itemDAO=new ItemDAOImpl();
-            itemDAO.DeleteCustomer(code);
+            itemDAO.DeleteItem(code);
 
             tblItems.getItems().remove(tblItems.getSelectionModel().getSelectedItem());
             tblItems.getSelectionModel().clearSelection();
@@ -198,7 +198,7 @@ public class ManageItemsFormController {
 //                pstm.executeUpdate();
 
                 ItemDAOImpl itemDAO=new ItemDAOImpl();
-                itemDAO.saveCustomer(new ItemDTO(code,description,unitPrice,qtyOnHand));
+                itemDAO.saveItem(new ItemDTO(code,description,unitPrice,qtyOnHand));
                 tblItems.getItems().add(new ItemTM(code, description, unitPrice, qtyOnHand));
 
             } catch (SQLException e) {
@@ -222,7 +222,7 @@ public class ManageItemsFormController {
 //                pstm.executeUpdate();
 
                 ItemDAOImpl itemDAO = new ItemDAOImpl();
-                itemDAO.updateCustomer(new ItemDTO(description,unitPrice,qtyOnHand,code));
+                itemDAO.updateItem(new ItemDTO(description,unitPrice,qtyOnHand,code));
 
                 ItemTM selectedItem = tblItems.getSelectionModel().getSelectedItem();
                 selectedItem.setDescription(description);
@@ -247,7 +247,7 @@ public class ManageItemsFormController {
 //        return pstm.executeQuery().next();
 
         ItemDAOImpl itemDAO = new ItemDAOImpl();
-        return itemDAO.existCustomer(code);
+        return itemDAO.existItem(code);
     }
 
 
