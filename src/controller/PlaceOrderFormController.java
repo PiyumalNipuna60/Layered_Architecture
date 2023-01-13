@@ -3,6 +3,7 @@ package controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import dao.CustomerDAOImpl;
 import db.DBConnection;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -198,6 +199,9 @@ public class PlaceOrderFormController {
         PreparedStatement pstm = connection.prepareStatement("SELECT id FROM Customer WHERE id=?");
         pstm.setString(1, id);
         return pstm.executeQuery().next();
+
+//        CustomerDAOImpl customerDAO = new CustomerDAOImpl();
+//        return customerDAO.existCustomer(id);
     }
 
     public String generateNewOrderId() {
