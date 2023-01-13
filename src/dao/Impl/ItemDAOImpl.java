@@ -1,5 +1,6 @@
-package dao;
+package dao.Impl;
 
+import dao.ItemDAO;
 import db.DBConnection;
 import model.ItemDTO;
 import view.tdm.ItemTM;
@@ -7,7 +8,7 @@ import view.tdm.ItemTM;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class ItemDAOImpl implements ItemDAO{
+public class ItemDAOImpl implements ItemDAO {
 
     public ArrayList<ItemDTO> getAllItem() throws SQLException, ClassNotFoundException {
         Connection connection = DBConnection.getDbConnection().getConnection();
