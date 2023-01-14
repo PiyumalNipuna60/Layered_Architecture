@@ -67,12 +67,13 @@ public class ItemDAOImpl implements ItemDAO {
     }
 
     public boolean existItem(String code) throws SQLException, ClassNotFoundException {
-        Connection connection = DBConnection.getDbConnection().getConnection();
-        PreparedStatement pstm = connection.prepareStatement("SELECT code FROM Item WHERE code=?");
-        pstm.setString(1, code);
-        return pstm.executeQuery().next();
+//        Connection connection = DBConnection.getDbConnection().getConnection();
+//        PreparedStatement pstm = connection.prepareStatement("SELECT code FROM Item WHERE code=?");
+//        pstm.setString(1, code);
+//        return pstm.executeQuery().next();
 
- //       return SqlUtil.executeUpdate("SELECT code FROM Item WHERE code=?",code);
+        ResultSet rst = SqlUtil.executeQuery("SELECT code FROM Item WHERE code=?", code);
+        return rst.next();
     }
 
     public String generateNewId() throws SQLException, ClassNotFoundException {

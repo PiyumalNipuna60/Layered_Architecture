@@ -52,12 +52,13 @@ public class CustomerDAOImpl implements CustomerDAO {
 
 
     public boolean existCustomer(String id) throws SQLException, ClassNotFoundException {
-        Connection connection = DBConnection.getDbConnection().getConnection();
-        PreparedStatement pstm = connection.prepareStatement("SELECT id FROM Customer WHERE id=?");
-        pstm.setString(1, id);
-        return pstm.executeQuery().next();
+//        Connection connection = DBConnection.getDbConnection().getConnection();
+//        PreparedStatement pstm = connection.prepareStatement("SELECT id FROM Customer WHERE id=?");
+//        pstm.setString(1, id);
+//        return pstm.executeQuery().next();
 
-      //  return SqlUtil.executeUpdate("SELECT id FROM Customer WHERE id=?",id);
+        ResultSet rst = SqlUtil.executeQuery("SELECT id FROM Customer WHERE id=?", id);
+        return rst.next();
     }
 
     public boolean DeleteCustomer(String id) throws SQLException, ClassNotFoundException {
