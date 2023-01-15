@@ -378,21 +378,27 @@ public class PlaceOrderFormController {
         /*Transaction*/
         Connection connection = null;
         try {
-            connection = DBConnection.getDbConnection().getConnection();
-            PreparedStatement stm = connection.prepareStatement("SELECT oid FROM `Orders` WHERE oid=?");
-            stm.setString(1, orderId);
+//            connection = DBConnection.getDbConnection().getConnection();
+//            PreparedStatement stm = connection.prepareStatement("SELECT oid FROM `Orders` WHERE oid=?");
+//            stm.setString(1, orderId);
+
+            OrderDAOImpl orderDAO = new OrderDAOImpl();
+            boolean exist = orderDAO.exist(orderId);
             /*if order id already exist*/
-            if (stm.executeQuery().next()) {
+            if (exist) {
 
             }
 
             connection.setAutoCommit(false);
-            stm = connection.prepareStatement("INSERT INTO `Orders` (oid, date, customerID) VALUES (?,?,?)");
-            stm.setString(1, orderId);
-            stm.setDate(2, Date.valueOf(orderDate));
-            stm.setString(3, customerId);
+//            stm = connection.prepareStatement("INSERT INTO `Orders` (oid, date, customerID) VALUES (?,?,?)");
+//            stm.setString(1, orderId);
+//            stm.setDate(2, Date.valueOf(orderDate));
+//            stm.setString(3, customerId);
 
-            if (stm.executeUpdate() != 1) {
+            OrderDAOImpl orderDAO1 = new OrderDAOImpl();
+            boolean save = orderDAO1.save(new OrderDTO(orderId, orderDate, customerId));
+
+            if (!save) {
                 connection.rollback();
                 connection.setAutoCommit(true);
                 return false;

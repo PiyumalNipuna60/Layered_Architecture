@@ -5,10 +5,7 @@ import dao.SqlUtil;
 import db.DBConnection;
 import model.OrderDTO;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class OrderDAOImpl implements CrudDAO<OrderDTO,String> {
@@ -19,7 +16,7 @@ public class OrderDAOImpl implements CrudDAO<OrderDTO,String> {
 
     @Override
     public boolean save(OrderDTO dto) throws SQLException, ClassNotFoundException {
-        return false;
+        return SqlUtil.executeUpdate("INSERT INTO `Orders` (oid, date, customerID) VALUES (?,?,?)",dto.getOrderId(),dto.getOrderDate(),dto.getCustomerId());
     }
 
     @Override
@@ -34,7 +31,8 @@ public class OrderDAOImpl implements CrudDAO<OrderDTO,String> {
 
     @Override
     public boolean exist(String s) throws SQLException, ClassNotFoundException {
-        return false;
+        ResultSet resultSet = SqlUtil.executeQuery("SELECT oid FROM `Orders` WHERE oid=?", s);
+        return resultSet.next();
     }
 
     @Override
