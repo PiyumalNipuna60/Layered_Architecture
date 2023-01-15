@@ -32,6 +32,7 @@ import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -242,12 +243,21 @@ public class PlaceOrderFormController {
 
     private void loadAllCustomerIds() {
         try {
-            Connection connection = DBConnection.getDbConnection().getConnection();
-            Statement stm = connection.createStatement();
-            ResultSet rst = stm.executeQuery("SELECT * FROM Customer");
+//            Connection connection = DBConnection.getDbConnection().getConnection();
+//            Statement stm = connection.createStatement();
+//            ResultSet rst = stm.executeQuery("SELECT * FROM Customer");
 
-            while (rst.next()) {
-                cmbCustomerId.getItems().add(rst.getString("id"));
+//            while (rst.next()) {
+//                cmbCustomerId.getItems().add(rst.getString("id"));
+//            }
+
+
+
+            CrudDAO<CustomerDTO,String> customerDAO = new CustomerDAOImpl();
+            ArrayList<CustomerDTO> rst = customerDAO.getAll();
+
+            for (CustomerDTO customer : rst) {
+                cmbCustomerId.getItems().add(customer.getId());
             }
 
         } catch (SQLException e) {
@@ -260,11 +270,17 @@ public class PlaceOrderFormController {
     private void loadAllItemCodes() {
         try {
             /*Get all items*/
-            Connection connection = DBConnection.getDbConnection().getConnection();
-            Statement stm = connection.createStatement();
-            ResultSet rst = stm.executeQuery("SELECT * FROM Item");
-            while (rst.next()) {
-                cmbItemCode.getItems().add(rst.getString("code"));
+//            Connection connection = DBConnection.getDbConnection().getConnection();
+//            Statement stm = connection.createStatement();
+//            ResultSet rst = stm.executeQuery("SELECT * FROM Item");
+//            while (rst.next()) {
+//                cmbItemCode.getItems().add(rst.getString("code"));
+//            }
+
+            CrudDAO<ItemDTO,String> itemDTO = new ItemDAOImpl();
+            ArrayList<ItemDTO> all = itemDTO.getAll();
+            for (ItemDTO item : all) {
+                cmbItemCode.getItems().add(item.getCode());
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
