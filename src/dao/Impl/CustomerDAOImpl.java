@@ -8,46 +8,8 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class CustomerDAOImpl implements CrudDAO<CustomerDTO,String> {
-    @Override
+
     public ArrayList<CustomerDTO> getAll() throws SQLException, ClassNotFoundException {
-        return null;
-    }
-
-    @Override
-    public boolean save(CustomerDTO dto) throws SQLException, ClassNotFoundException {
-        return false;
-    }
-
-    @Override
-    public boolean Update(CustomerDTO dto) throws SQLException, ClassNotFoundException {
-        return false;
-    }
-
-    @Override
-    public boolean exist(String s) throws SQLException, ClassNotFoundException {
-        return false;
-    }
-
-    @Override
-    public boolean Delete(String s) throws SQLException, ClassNotFoundException {
-        return false;
-    }
-
-    @Override
-    public String generateNewId() throws SQLException, ClassNotFoundException {
-        return null;
-    }
-
-
-
-
-
-
-
-
-
-
-/*    public ArrayList<CustomerDTO> getAll() throws SQLException, ClassNotFoundException {
 //        Connection connection = DBConnection.getDbConnection().getConnection();
 //        Statement stm = connection.createStatement();
 //        ResultSet rst = stm.executeQuery("SELECT * FROM CustomerSELECT * FROM Customer");
@@ -65,7 +27,7 @@ public class CustomerDAOImpl implements CrudDAO<CustomerDTO,String> {
         return AllCustomer;
     }
 
-    public boolean save(String id, String name,String address) throws SQLException, ClassNotFoundException {
+    public boolean save(CustomerDTO dto) throws SQLException, ClassNotFoundException {
 //        Connection connection = DBConnection.getDbConnection().getConnection();
 //        PreparedStatement pstm = connection.prepareStatement("INSERT INTO Customer (id,name, address) VALUES (?,?,?)");
 //        pstm.setString(1, id);
@@ -73,7 +35,7 @@ public class CustomerDAOImpl implements CrudDAO<CustomerDTO,String> {
 //        pstm.setString(3, address);
 //        return pstm.executeUpdate()>0;
 
-        return SqlUtil.executeUpdate("INSERT INTO Customer (id,name, address) VALUES (?,?,?)",id,name,address);
+        return SqlUtil.executeUpdate("INSERT INTO Customer (id,name, address) VALUES (?,?,?)",dto.getId(),dto.getName(),dto.getAddress());
     }
 
     public boolean Update(CustomerDTO dto) throws SQLException, ClassNotFoundException {
@@ -118,7 +80,7 @@ public class CustomerDAOImpl implements CrudDAO<CustomerDTO,String> {
         } else {
             return "C00-001";
         }
-    }*/
+    }
 
 
 }
