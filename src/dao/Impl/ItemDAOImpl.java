@@ -1,14 +1,48 @@
 package dao.Impl;
 
+import dao.CrudDAO;
 import dao.SqlUtil;
 import model.ItemDTO;
 
 import java.sql.*;
 import java.util.ArrayList;
 
-public class ItemDAOImpl implements ItemDAO {
+public class ItemDAOImpl implements CrudDAO<ItemDTO,String> {
+    @Override
+    public ArrayList<ItemDTO> getAll() throws SQLException, ClassNotFoundException {
+        return null;
+    }
 
-    public ArrayList<ItemDTO> getAllItem() throws SQLException, ClassNotFoundException {
+    @Override
+    public boolean save(ItemDTO dto) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public boolean Update(ItemDTO dto) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public boolean exist(String s) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public boolean Delete(String s) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public String generateNewId() throws SQLException, ClassNotFoundException {
+        return null;
+    }
+
+
+
+
+
+/*    public ArrayList<ItemDTO> getAllItem() throws SQLException, ClassNotFoundException {
 //        Connection connection = DBConnection.getDbConnection().getConnection();
 //        Statement stm = connection.createStatement();
 //        ResultSet rst = stm.executeQuery("SELECT * FROM Item");
@@ -85,5 +119,5 @@ public class ItemDAOImpl implements ItemDAO {
         } else {
             return "I00-001";
         }
-    }
+    }*/
 }
