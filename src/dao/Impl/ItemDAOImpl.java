@@ -72,7 +72,7 @@ public class ItemDAOImpl implements CrudDAO<ItemDTO, String> {
 //        ResultSet rst = pstm.executeQuery();
 //        rst.next();
 
-        ResultSet rst = SqlUtil.executeQuery("SELECT * FROM Customer WHERE id=?", s);
+        ResultSet rst = SqlUtil.executeQuery("SELECT * FROM Item WHERE code=?", s);
         if (rst.next()) {
             return new ItemDTO(rst.getString(1), rst.getString(2), rst.getBigDecimal(3), rst.getInt(4));
         }

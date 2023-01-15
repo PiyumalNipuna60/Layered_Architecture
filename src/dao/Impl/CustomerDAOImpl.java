@@ -4,10 +4,11 @@ import dao.CrudDAO;
 import dao.SqlUtil;
 import model.CustomerDTO;
 
-import java.sql.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class CustomerDAOImpl implements CrudDAO<CustomerDTO,String> {
+public class CustomerDAOImpl implements CrudDAO<CustomerDTO, String> {
 
     public ArrayList<CustomerDTO> getAll() throws SQLException, ClassNotFoundException {
 //        Connection connection = DBConnection.getDbConnection().getConnection();
@@ -15,9 +16,9 @@ public class CustomerDAOImpl implements CrudDAO<CustomerDTO,String> {
 //        ResultSet rst = stm.executeQuery("SELECT * FROM CustomerSELECT * FROM Customer");
 
         ResultSet rst = SqlUtil.executeQuery("SELECT * FROM Customer");
-        ArrayList<CustomerDTO> AllCustomer=new ArrayList<>();
+        ArrayList<CustomerDTO> AllCustomer = new ArrayList<>();
 
-        while (rst.next()){
+        while (rst.next()) {
             AllCustomer.add(new CustomerDTO(
                     rst.getString(1),
                     rst.getString(2),
@@ -35,7 +36,7 @@ public class CustomerDAOImpl implements CrudDAO<CustomerDTO,String> {
 //        pstm.setString(3, address);
 //        return pstm.executeUpdate()>0;
 
-        return SqlUtil.executeUpdate("INSERT INTO Customer (id,name, address) VALUES (?,?,?)",dto.getId(),dto.getName(),dto.getAddress());
+        return SqlUtil.executeUpdate("INSERT INTO Customer (id,name, address) VALUES (?,?,?)", dto.getId(), dto.getName(), dto.getAddress());
     }
 
     public boolean Update(CustomerDTO dto) throws SQLException, ClassNotFoundException {
@@ -46,7 +47,17 @@ public class CustomerDAOImpl implements CrudDAO<CustomerDTO,String> {
 //        pstm.setString(3, dto.getId());
 //        return pstm.executeUpdate()>0;
 
-        return SqlUtil.executeUpdate("UPDATE Customer SET name=?, address=? WHERE id=?",dto.getName(),dto.getAddress(),dto.getId());
+        return SqlUtil.executeUpdate("UPDATE Customer SET name=?, address=? WHERE id=?", dto.getName(), dto.getAddress(), dto.getId());
+    }
+
+    @Override
+    public CustomerDTO Search(String s) throws SQLException, ClassNotFoundException {
+
+        ResultSet rst = SqlUtil.executeQuery("SELECT * FROM Item WHERE id=?", s);
+        if (rst.next()) {
+            return new CustomerDTO(rst.getString(1), rst.getString(2), rst.getString(3));
+        }
+        return null;
     }
 
 
@@ -66,7 +77,7 @@ public class CustomerDAOImpl implements CrudDAO<CustomerDTO,String> {
 //        pstm.setString(1, id);
 //        return pstm.executeUpdate()>0;
 
-        return SqlUtil.executeUpdate("DELETE FROM Customer WHERE id=?",id);
+        return SqlUtil.executeUpdate("DELETE FROM Customer WHERE id=?", id);
     }
 
     public String generateNewId() throws SQLException, ClassNotFoundException {

@@ -5,6 +5,8 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import dao.CrudDAO;
 import dao.Impl.CustomerDAOImpl;
+import dao.Impl.ItemDAOImpl;
+import dao.SqlUtil;
 import db.DBConnection;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -113,11 +115,14 @@ public class PlaceOrderFormController {
 //                        CustomerDTO customerDTO = new CustomerDTO(newValue + "", rst.getString("name"), rst.getString("address"));
 
                         CrudDAO<CustomerDTO,String> customerDAO = new CustomerDAOImpl();
-                        CustomerDTO search = customerDAO.Search(newValue);
+                        CustomerDTO search = customerDAO.Search(newValue+"");
 
                         txtCustomerName.setText(search.getName());
+
+
                     } catch (SQLException e) {
-                        new Alert(Alert.AlertType.ERROR, "Failed to find the customer " + newValue + "" + e).show();
+//                        new Alert(Alert.AlertType.ERROR, "Failed to find the customer " + newValue + "" + e).show();
+                        System.out.println(e);
                     }
 
                 } catch (SQLException throwables) {
@@ -142,12 +147,16 @@ public class PlaceOrderFormController {
                     if (!existItem(newItemCode + "")) {
 //                        throw new NotFoundException("There is no such item associated with the id " + code);
                     }
-                    Connection connection = DBConnection.getDbConnection().getConnection();
-                    PreparedStatement pstm = connection.prepareStatement("SELECT * FROM Item WHERE code=?");
-                    pstm.setString(1, newItemCode + "");
-                    ResultSet rst = pstm.executeQuery();
-                    rst.next();
-                    ItemDTO item = new ItemDTO(newItemCode + "", rst.getString("description"), rst.getBigDecimal("unitPrice"), rst.getInt("qtyOnHand"));
+//                    Connection connection = DBConnection.getDbConnection().getConnection();
+//                    PreparedStatement pstm = connection.prepareStatement("SELECT * FROM Item WHERE code=?");
+//                    pstm.setString(1, newItemCode + "");
+//                    ResultSet rst = pstm.executeQuery();
+//                    rst.next();
+//                    ItemDTO item = new ItemDTO(newItemCode + "", rst.getString("description"), rst.getBigDecimal("unitPrice"), rst.getInt("qtyOnHand"));
+
+
+                    CrudDAO<ItemDTO,String> itemDAO = new ItemDAOImpl();
+                    ItemDTO item = itemDAO.Search(newItemCode + "");
 
                     txtDescription.setText(item.getDescription());
                     txtUnitPrice.setText(item.getUnitPrice().setScale(2).toString());
