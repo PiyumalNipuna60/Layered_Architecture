@@ -121,7 +121,7 @@ public class PlaceOrderFormController {
 
 
                     } catch (SQLException e) {
-//                        new Alert(Alert.AlertType.ERROR, "Failed to find the customer " + newValue + "" + e).show();
+                        new Alert(Alert.AlertType.ERROR, "Failed to find the customer " + newValue + "" + e).show();
                         System.out.println(e);
                     }
 
@@ -153,7 +153,6 @@ public class PlaceOrderFormController {
 //                    ResultSet rst = pstm.executeQuery();
 //                    rst.next();
 //                    ItemDTO item = new ItemDTO(newItemCode + "", rst.getString("description"), rst.getBigDecimal("unitPrice"), rst.getInt("qtyOnHand"));
-
 
                     CrudDAO<ItemDTO,String> itemDAO = new ItemDAOImpl();
                     ItemDTO item = itemDAO.Search(newItemCode + "");
@@ -201,20 +200,23 @@ public class PlaceOrderFormController {
     }
 
     private boolean existItem(String code) throws SQLException, ClassNotFoundException {
-        Connection connection = DBConnection.getDbConnection().getConnection();
-        PreparedStatement pstm = connection.prepareStatement("SELECT code FROM Item WHERE code=?");
-        pstm.setString(1, code);
-        return pstm.executeQuery().next();
+//        Connection connection = DBConnection.getDbConnection().getConnection();
+//        PreparedStatement pstm = connection.prepareStatement("SELECT code FROM Item WHERE code=?");
+//        pstm.setString(1, code);
+//        return pstm.executeQuery().next();
+
+        CrudDAO<ItemDTO,String> itemDAO = new ItemDAOImpl();
+        return itemDAO.exist(code);
     }
 
     boolean existCustomer(String id) throws SQLException, ClassNotFoundException {
-        Connection connection = DBConnection.getDbConnection().getConnection();
-        PreparedStatement pstm = connection.prepareStatement("SELECT id FROM Customer WHERE id=?");
-        pstm.setString(1, id);
-        return pstm.executeQuery().next();
+//        Connection connection = DBConnection.getDbConnection().getConnection();
+//        PreparedStatement pstm = connection.prepareStatement("SELECT id FROM Customer WHERE id=?");
+//        pstm.setString(1, id);
+//        return pstm.executeQuery().next();
 
-//        CustomerDAOImpl customerDAO = new CustomerDAOImpl();
-//        return customerDAO.existCustomer(id);
+        CrudDAO<CustomerDTO,String > customerDAO = new CustomerDAOImpl();
+        return customerDAO.exist(id);
     }
 
     public String generateNewOrderId() {
