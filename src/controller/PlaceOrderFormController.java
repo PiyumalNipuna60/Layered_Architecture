@@ -7,6 +7,7 @@ import dao.CrudDAO;
 import dao.Impl.CustomerDAOImpl;
 import dao.Impl.ItemDAOImpl;
 import dao.Impl.OrderDAOImpl;
+import dao.Impl.OrderDetailsDAOImpl;
 import dao.SqlUtil;
 import db.DBConnection;
 import javafx.application.Platform;
@@ -395,7 +396,7 @@ public class PlaceOrderFormController {
 //            stm.setDate(2, Date.valueOf(orderDate));
 //            stm.setString(3, customerId);
 
-            OrderDAOImpl orderDAO1 = new OrderDAOImpl();
+            CrudDAO<OrderDTO,String> orderDAO1 = new OrderDAOImpl();
             boolean save = orderDAO1.save(new OrderDTO(orderId, orderDate, customerId));
 
             if (!save) {
@@ -404,15 +405,20 @@ public class PlaceOrderFormController {
                 return false;
             }
 
-            stm = connection.prepareStatement("INSERT INTO OrderDetails (oid, itemCode, unitPrice, qty) VALUES (?,?,?,?)");
+//            stm = connection.prepareStatement("INSERT INTO OrderDetails (oid, itemCode, unitPrice, qty) VALUES (?,?,?,?)");
+
+            CrudDAO<OrderDetailDTO,String> orderDetailsDAO = new OrderDetailsDAOImpl();
+
 
             for (OrderDetailDTO detail : orderDetails) {
-                stm.setString(1, orderId);
-                stm.setString(2, detail.getItemCode());
-                stm.setBigDecimal(3, detail.getUnitPrice());
-                stm.setInt(4, detail.getQty());
+//                stm.setString(1, orderId);
+//                stm.setString(2, detail.getItemCode());
+//                stm.setBigDecimal(3, detail.getUnitPrice());
+//                stm.setInt(4, detail.getQty());
 
-                if (stm.executeUpdate() != 1) {
+                boolean save1 = orderDetailsDAO.save(detail);
+
+                if (save1) {
                     connection.rollback();
                     connection.setAutoCommit(true);
                     return false;
