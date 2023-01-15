@@ -2,6 +2,7 @@ package controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import dao.CrudDAO;
 import dao.Impl.ItemDAOImpl;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -40,7 +41,7 @@ public class ManageItemsFormController {
     public JFXTextField txtUnitPrice;
     public JFXButton btnAddNewItem;
 
-    private final ItemDAO itemDAO = new ItemDAOImpl();
+    private final CrudDAO itemDAO = new ItemDAOImpl();
 
     public void initialize() {
         tblItems.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("code"));
@@ -83,7 +84,7 @@ public class ManageItemsFormController {
 //                tblItems.getItems().add(new ItemTM(rst.getString("code"), rst.getString("description"), rst.getBigDecimal("unitPrice"), rst.getInt("qtyOnHand")));
 //            }
             //   ItemDAO itemDAO=new ItemDAOImpl();
-            ArrayList<ItemDTO> allItem = itemDAO.getAllItem();
+            ArrayList<ItemDTO> allItem = itemDAO.getAll();
 
             for (ItemDTO item : allItem) {
                 tblItems.getItems().add(new ItemTM(item.getCode(), item.getDescription(), item.getUnitPrice(), item.getQtyOnHand()));
@@ -150,7 +151,7 @@ public class ManageItemsFormController {
 //            pstm.executeUpdate();
 
             //   ItemDAO itemDAO=new ItemDAOImpl();
-            itemDAO.DeleteItem(code);
+            itemDAO.Delete(code);
 
             tblItems.getItems().remove(tblItems.getSelectionModel().getSelectedItem());
             tblItems.getSelectionModel().clearSelection();
@@ -199,7 +200,7 @@ public class ManageItemsFormController {
 //                pstm.executeUpdate();
 
                 //   ItemDAO itemDAO=new ItemDAOImpl();
-                itemDAO.saveItem(new ItemDTO(code, description, unitPrice, qtyOnHand));
+                itemDAO.save(new ItemDTO(code, description, unitPrice, qtyOnHand));
                 tblItems.getItems().add(new ItemTM(code, description, unitPrice, qtyOnHand));
 
             } catch (SQLException e) {
@@ -223,7 +224,7 @@ public class ManageItemsFormController {
 //                pstm.executeUpdate();
 
                 //   ItemDAO itemDAO = new ItemDAOImpl();
-                itemDAO.updateItem(new ItemDTO(description, unitPrice, qtyOnHand, code));
+                itemDAO.Update(new ItemDTO(description, unitPrice, qtyOnHand, code));
 
                 ItemTM selectedItem = tblItems.getSelectionModel().getSelectedItem();
                 selectedItem.setDescription(description);
@@ -248,7 +249,7 @@ public class ManageItemsFormController {
 //        return pstm.executeQuery().next();
 
         //   ItemDAO itemDAO = new ItemDAOImpl();
-        return itemDAO.existItem(code);
+        return itemDAO.exist(code);
     }
 
 
