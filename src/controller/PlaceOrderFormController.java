@@ -61,6 +61,11 @@ public class PlaceOrderFormController {
     public Label lblTotal;
     private String orderId;
 
+    CrudDAO<CustomerDTO,String> customerDAO = new CustomerDAOImpl();
+    CrudDAO<ItemDTO,String> itemDAO = new ItemDAOImpl();
+    CrudDAO<OrderDTO,String> orderDAO = new OrderDAOImpl();
+    CrudDAO<OrderDetailDTO,String> orderDetailsDAO = new OrderDetailsDAOImpl();
+
     public void initialize() throws SQLException, ClassNotFoundException {
 
         tblOrderDetails.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("code"));
@@ -118,9 +123,8 @@ public class PlaceOrderFormController {
 //                        rst.next();
 //                        CustomerDTO customerDTO = new CustomerDTO(newValue + "", rst.getString("name"), rst.getString("address"));
 
-                        CrudDAO<CustomerDTO,String> customerDAO = new CustomerDAOImpl();
-                        CustomerDTO search = customerDAO.Search(newValue+"");
 
+                        CustomerDTO search = customerDAO.Search(newValue+"");
                         txtCustomerName.setText(search.getName());
 
 
@@ -158,7 +162,7 @@ public class PlaceOrderFormController {
 //                    rst.next();
 //                    ItemDTO item = new ItemDTO(newItemCode + "", rst.getString("description"), rst.getBigDecimal("unitPrice"), rst.getInt("qtyOnHand"));
 
-                    CrudDAO<ItemDTO,String> itemDAO = new ItemDAOImpl();
+
                     ItemDTO item = itemDAO.Search(newItemCode + "");
 
                     txtDescription.setText(item.getDescription());
@@ -209,7 +213,6 @@ public class PlaceOrderFormController {
 //        pstm.setString(1, code);
 //        return pstm.executeQuery().next();
 
-        CrudDAO<ItemDTO,String> itemDAO = new ItemDAOImpl();
         return itemDAO.exist(code);
     }
 
@@ -219,7 +222,6 @@ public class PlaceOrderFormController {
 //        pstm.setString(1, id);
 //        return pstm.executeQuery().next();
 
-        CrudDAO<CustomerDTO,String > customerDAO = new CustomerDAOImpl();
         return customerDAO.exist(id);
     }
 
@@ -231,7 +233,7 @@ public class PlaceOrderFormController {
 //
 //            return rst.next() ? String.format("OID-%03d", (Integer.parseInt(rst.getString("oid").replace("OID-", "")) + 1)) : "OID-001";
 
-            CrudDAO<OrderDTO,String> orderDAO = new OrderDAOImpl();
+
             return orderDAO.generateNewId();
 
         } catch (SQLException e) {
@@ -253,8 +255,6 @@ public class PlaceOrderFormController {
 //            }
 
 
-
-            CrudDAO<CustomerDTO,String> customerDAO = new CustomerDAOImpl();
             ArrayList<CustomerDTO> rst = customerDAO.getAll();
 
             for (CustomerDTO customer : rst) {
@@ -278,7 +278,6 @@ public class PlaceOrderFormController {
 //                cmbItemCode.getItems().add(rst.getString("code"));
 //            }
 
-            CrudDAO<ItemDTO,String> itemDAO = new ItemDAOImpl();
             ArrayList<ItemDTO> all = itemDAO.getAll();
             for (ItemDTO item : all) {
                 cmbItemCode.getItems().add(item.getCode());
@@ -383,7 +382,6 @@ public class PlaceOrderFormController {
 //            PreparedStatement stm = connection.prepareStatement("SELECT oid FROM `Orders` WHERE oid=?");
 //            stm.setString(1, orderId);
 
-            OrderDAOImpl orderDAO = new OrderDAOImpl();
             boolean exist = orderDAO.exist(orderId);
             /*if order id already exist*/
             if (exist) {
@@ -396,8 +394,7 @@ public class PlaceOrderFormController {
 //            stm.setDate(2, Date.valueOf(orderDate));
 //            stm.setString(3, customerId);
 
-            CrudDAO<OrderDTO,String> orderDAO1 = new OrderDAOImpl();
-            boolean save = orderDAO1.save(new OrderDTO(orderId, orderDate, customerId));
+            boolean save = orderDAO.save(new OrderDTO(orderId, orderDate, customerId));
 
             if (!save) {
                 connection.rollback();
@@ -406,9 +403,6 @@ public class PlaceOrderFormController {
             }
 
 //            stm = connection.prepareStatement("INSERT INTO OrderDetails (oid, itemCode, unitPrice, qty) VALUES (?,?,?,?)");
-
-            CrudDAO<OrderDetailDTO,String> orderDetailsDAO = new OrderDetailsDAOImpl();
-
 
             for (OrderDetailDTO detail : orderDetails) {
 //                stm.setString(1, orderId);
@@ -434,7 +428,6 @@ public class PlaceOrderFormController {
 //                pstm.setInt(3, item.getQtyOnHand());
 //                pstm.setString(4, item.getCode());
 
-                ItemDAOImpl itemDAO = new ItemDAOImpl();
                 boolean update = itemDAO.Update(item);
 
                 if (!update) {
@@ -466,7 +459,6 @@ public class PlaceOrderFormController {
 //            rst.next();
 //            return new ItemDTO(code, rst.getString("description"), rst.getBigDecimal("unitPrice"), rst.getInt("qtyOnHand"));
 
-            ItemDAOImpl itemDAO = new ItemDAOImpl();
             return itemDAO.Search(code);
 
         } catch (SQLException e) {
