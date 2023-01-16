@@ -1,6 +1,7 @@
 package dao.Impl;
 
 import dao.CrudDAO;
+import dao.CustomerDAO;
 import dao.SqlUtil;
 import model.CustomerDTO;
 
@@ -8,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class CustomerDAOImpl implements CrudDAO<CustomerDTO, String> {
+public class CustomerDAOImpl implements CustomerDAO {
 
     public ArrayList<CustomerDTO> getAll() throws SQLException, ClassNotFoundException {
 //        Connection connection = DBConnection.getDbConnection().getConnection();
