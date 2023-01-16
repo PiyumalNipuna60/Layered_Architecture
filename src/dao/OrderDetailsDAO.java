@@ -1,4 +1,4 @@
 package dao;
 
-public class OrderDetailsDAO {
+public interface OrderDetailsDAO {
 }
