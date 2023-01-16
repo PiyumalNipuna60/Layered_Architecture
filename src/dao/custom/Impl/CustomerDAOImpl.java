@@ -1,7 +1,6 @@
-package dao.Impl;
+package dao.custom.Impl;
 
-import dao.CrudDAO;
-import dao.CustomerDAO;
+import dao.custom.CustomerDAO;
 import dao.SqlUtil;
 import model.CustomerDTO;
 
