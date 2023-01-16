@@ -24,9 +24,17 @@ public class ItemDTO implements Serializable {
         this.qtyOnHand = qtyOnHand;
     }
 
+    public ItemDTO(String string, String string1, int anInt, BigDecimal bigDecimal) {
+        this.code = string;
+        this.description = string1;
+        this.unitPrice = bigDecimal;
+        this.qtyOnHand = anInt;
+    }
+
     public String getCode() {
         return code;
     }
+
 
     public void setCode(String code) {
         this.code = code;

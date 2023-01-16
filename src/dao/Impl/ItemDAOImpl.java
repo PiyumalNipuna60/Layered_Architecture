@@ -50,7 +50,7 @@ public class ItemDAOImpl implements CrudDAO<ItemDTO, String> {
 //        pstm.setInt(4, dto.getQtyOnHand());
 //        return pstm.executeUpdate()>0;
 
-        return SqlUtil.executeUpdate("INSERT INTO Item (code, description, unitPrice, qtyOnHand) VALUES (?,?,?,?)", dto.getCode(), dto.getDescription(), dto.getUnitPrice(), dto.getQtyOnHand());
+        return SqlUtil.executeUpdate("INSERT INTO Item (code, description, qtyOnHand, unitPrice) VALUES (?,?,?,?)", dto.getCode(), dto.getDescription(), dto.getQtyOnHand(), dto.getUnitPrice());
     }
 
     public boolean Update(ItemDTO dto) throws SQLException, ClassNotFoundException {
@@ -74,7 +74,7 @@ public class ItemDAOImpl implements CrudDAO<ItemDTO, String> {
 
         ResultSet rst = SqlUtil.executeQuery("SELECT * FROM Item WHERE code=?", s);
         if (rst.next()) {
-            return new ItemDTO(rst.getString(1), rst.getString(2), rst.getBigDecimal(3), rst.getInt(4));
+            return new ItemDTO(rst.getString(1), rst.getString(2), rst.getInt(3), rst.getBigDecimal(4));
         }
         return null;
     }

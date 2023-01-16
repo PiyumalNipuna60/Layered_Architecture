@@ -435,7 +435,7 @@ public class PlaceOrderFormController {
 //                pstm.setString(4, item.getCode());
 
                 ItemDAOImpl itemDAO = new ItemDAOImpl();
-                boolean update = itemDAO.Update(new ItemDTO(item.getDescription(), item.getUnitPrice(), item.getQtyOnHand(), item.getCode()));
+                boolean update = itemDAO.Update(item);
 
                 if (!update) {
                     connection.rollback();
