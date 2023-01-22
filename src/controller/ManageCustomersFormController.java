@@ -64,6 +64,8 @@ public class ManageCustomersFormController {
                 txtCustomerId.setDisable(false);
                 txtCustomerName.setDisable(false);
                 txtCustomerAddress.setDisable(false);
+
+
             }
         });
 
