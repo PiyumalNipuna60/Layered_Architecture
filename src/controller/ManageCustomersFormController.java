@@ -178,7 +178,10 @@ public class ManageCustomersFormController {
                 }
 
                 //   CustomerDAO customerDAO=new CustomerDAOImpl();
-                customerDAO.Update(new CustomerDTO(name, address, id));
+//                customerDAO.Update(new CustomerDTO(name, address, id));
+
+                CustomerBOImpl customerBO = new CustomerBOImpl();
+                customerBO.updateCustomer(new CustomerDTO(name, address, id));
 
             } catch (SQLException e) {
                 new Alert(Alert.AlertType.ERROR, "Failed to update the customer " + id + e.getMessage()).show();
