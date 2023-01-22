@@ -26,4 +26,10 @@ public class CustomerBOImpl {
     public boolean existCustomer(String id) throws SQLException, ClassNotFoundException {
         return customerDAO.exist(id);
     }
+
+    public boolean deleteCustomer(String id) throws SQLException, ClassNotFoundException {
+        return customerDAO.Delete(id);
+    }
+
+
 }

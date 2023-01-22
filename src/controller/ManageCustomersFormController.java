@@ -221,7 +221,9 @@ public class ManageCustomersFormController {
             }
 
             //   CustomerDAO customerDAO=new CustomerDAOImpl();
-            customerDAO.Delete(id);
+//            customerDAO.Delete(id);
+            CustomerBOImpl customerBO = new CustomerBOImpl();
+            customerBO.deleteCustomer(id);
 
             tblCustomers.getItems().remove(tblCustomers.getSelectionModel().getSelectedItem());
             tblCustomers.getSelectionModel().clearSelection();
@@ -247,7 +249,9 @@ public class ManageCustomersFormController {
 //            }
 
             //   CustomerDAO customerDAO=new CustomerDAOImpl();
-            return customerDAO.generateNewId();
+//            return customerDAO.generateNewId();
+            CustomerBOImpl customerBO = new CustomerBOImpl();
+            return customerBO.generateCustomerNewId();
 
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, "Failed to generate a new id " + e.getMessage()).show();
