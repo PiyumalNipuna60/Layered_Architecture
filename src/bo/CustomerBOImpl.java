@@ -22,4 +22,8 @@ public class CustomerBOImpl {
     public boolean updateCustomer(CustomerDTO dto) throws SQLException, ClassNotFoundException {
         return customerDAO.Update(dto);
     }
+
+    public boolean existCustomer(String id) throws SQLException, ClassNotFoundException {
+        return customerDAO.exist(id);
+    }
 }

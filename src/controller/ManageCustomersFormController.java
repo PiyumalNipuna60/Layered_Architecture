@@ -206,7 +206,9 @@ public class ManageCustomersFormController {
 //        return pstm.executeQuery().next();
 
         ///   CustomerDAO customerDAO=new CustomerDAOImpl();
-        return customerDAO.exist(id);
+//        return customerDAO.exist(id);
+        CustomerBOImpl customerBO = new CustomerBOImpl();
+        return customerBO.existCustomer(id);
     }
 
 
