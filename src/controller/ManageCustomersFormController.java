@@ -41,7 +41,7 @@ public class ManageCustomersFormController {
     public TableView<CustomerTM> tblCustomers;
     public JFXButton btnAddNewCustomer;
 
-    private CustomerDAO customerDAO = new CustomerDAOImpl();
+//    private CustomerDAO customerDAO = new CustomerDAOImpl();
 
     public void initialize() {
 
