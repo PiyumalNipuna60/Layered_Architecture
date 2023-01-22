@@ -31,5 +31,7 @@ public class CustomerBOImpl {
         return customerDAO.Delete(id);
     }
 
-
+    public String generateCustomerNewId() throws SQLException, ClassNotFoundException {
+        return customerDAO.generateNewId();
+    }
 }
