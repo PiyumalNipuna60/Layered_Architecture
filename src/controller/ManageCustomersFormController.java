@@ -1,5 +1,6 @@
 package controller;
 
+import bo.CustomerBOImpl;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import dao.custom.CustomerDAO;
@@ -77,7 +78,10 @@ public class ManageCustomersFormController {
         tblCustomers.getItems().clear();
         /*Get all customers*/
         try {
-            ArrayList<CustomerDTO> allCustomer = customerDAO.getAll();
+
+            CustomerBOImpl customerBO = new CustomerBOImpl();
+//            ArrayList<CustomerDTO> allCustomer = customerDAO.getAll();
+            ArrayList<CustomerDTO> allCustomer = customerBO.getAllCustomer();
 
             for (CustomerDTO customer : allCustomer) {
                 tblCustomers.getItems().add(new CustomerTM(customer.getId(), customer.getName(), customer.getAddress()));
@@ -152,7 +156,10 @@ public class ManageCustomersFormController {
                     new Alert(Alert.AlertType.ERROR, id + " already exists").show();
                 }
                 //  CustomerDAOImpl customerDAO = new CustomerDAOImpl();
-                customerDAO.save(new CustomerDTO(id,name,address));
+//                customerDAO.save(new CustomerDTO(id,name,address));
+
+                CustomerBOImpl customerBO = new CustomerBOImpl();
+                customerBO.saveCustomer(new CustomerDTO(id,name,address));
 
                 tblCustomers.getItems().add(new CustomerTM(id, name, address));
             } catch (SQLException e) {
