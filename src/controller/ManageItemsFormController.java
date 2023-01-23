@@ -1,5 +1,6 @@
 package controller;
 
+import bo.ItemBOImpl;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import dao.custom.Impl.ItemDAOImpl;
@@ -41,7 +42,7 @@ public class ManageItemsFormController {
     public JFXTextField txtUnitPrice;
     public JFXButton btnAddNewItem;
 
-    private final ItemDAO itemDAO = new ItemDAOImpl();
+//    private final ItemDAO itemDAO = new ItemDAOImpl();
 
     public void initialize() {
         tblItems.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("code"));
@@ -84,7 +85,9 @@ public class ManageItemsFormController {
 //                tblItems.getItems().add(new ItemTM(rst.getString("code"), rst.getString("description"), rst.getBigDecimal("unitPrice"), rst.getInt("qtyOnHand")));
 //            }
             //   ItemDAO itemDAO=new ItemDAOImpl();
-            ArrayList<ItemDTO> allItem = itemDAO.getAll();
+//            ArrayList<ItemDTO> allItem = itemDAO.getAll();
+            ItemBOImpl itemBO = new ItemBOImpl();
+            ArrayList<ItemDTO> allItem = itemBO.getAllItem();
 
             for (ItemDTO item : allItem) {
                 tblItems.getItems().add(new ItemTM(item.getCode(), item.getDescription(), item.getUnitPrice(), item.getQtyOnHand()));
@@ -151,6 +154,7 @@ public class ManageItemsFormController {
 //            pstm.executeUpdate();
 
             //   ItemDAO itemDAO=new ItemDAOImpl();
+
             itemDAO.Delete(code);
 
             tblItems.getItems().remove(tblItems.getSelectionModel().getSelectedItem());

@@ -1,4 +1,17 @@
 package bo;
 
+import dao.custom.Impl.ItemDAOImpl;
+import dao.custom.ItemDAO;
+import model.ItemDTO;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 public class ItemBOImpl {
+    private final ItemDAO itemDAO = new ItemDAOImpl();
+
+    public ArrayList<ItemDTO> getAllItem() throws SQLException, ClassNotFoundException {
+        return itemDAO.getAll();
+    }
+
 }
