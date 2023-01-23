@@ -21,4 +21,12 @@ public class ItemBOImpl {
     public boolean saveItem(ItemDTO dto) throws SQLException, ClassNotFoundException {
         return itemDAO.save(dto);
     }
+
+    public boolean updateItem(ItemDTO dto) throws SQLException, ClassNotFoundException {
+        return itemDAO.Update(dto);
+    }
+
+    public boolean existItem(String code) throws SQLException, ClassNotFoundException {
+        return itemDAO.exist(code);
+    }
 }
