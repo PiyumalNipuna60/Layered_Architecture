@@ -155,7 +155,9 @@ public class ManageItemsFormController {
 
             //   ItemDAO itemDAO=new ItemDAOImpl();
 
-            itemDAO.Delete(code);
+//            itemDAO.Delete(code);
+            ItemBOImpl itemBO = new ItemBOImpl();
+            itemBO.deleteItem(code);
 
             tblItems.getItems().remove(tblItems.getSelectionModel().getSelectedItem());
             tblItems.getSelectionModel().clearSelection();

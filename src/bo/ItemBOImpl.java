@@ -14,4 +14,8 @@ public class ItemBOImpl {
         return itemDAO.getAll();
     }
 
+    public boolean deleteItem(String code) throws SQLException, ClassNotFoundException {
+        return itemDAO.Delete(code);
+    }
+
 }
