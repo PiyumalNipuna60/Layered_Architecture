@@ -18,4 +18,7 @@ public class ItemBOImpl {
         return itemDAO.Delete(code);
     }
 
+    public boolean saveItem(ItemDTO dto) throws SQLException, ClassNotFoundException {
+        return itemDAO.save(dto);
+    }
 }

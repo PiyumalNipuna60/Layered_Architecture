@@ -206,7 +206,10 @@ public class ManageItemsFormController {
 //                pstm.executeUpdate();
 
                 //   ItemDAO itemDAO=new ItemDAOImpl();
-                itemDAO.save(new ItemDTO(code, description, unitPrice, qtyOnHand));
+//                itemDAO.save(new ItemDTO(code, description, unitPrice, qtyOnHand));
+                ItemBOImpl itemBO = new ItemBOImpl();
+                itemBO.saveItem(new ItemDTO(code,description,unitPrice,qtyOnHand));
+
                 tblItems.getItems().add(new ItemTM(code, description, unitPrice, qtyOnHand));
 
             } catch (SQLException e) {
