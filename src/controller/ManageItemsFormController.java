@@ -280,8 +280,9 @@ public class ManageItemsFormController {
 //            }
 
             //   ItemDAO itemDAO = new ItemDAOImpl();
-            return itemDAO.generateNewId();
-
+//            return itemDAO.generateNewId();
+            ItemBOImpl itemBO = new ItemBOImpl();
+            return itemBO.generateNewItemCode();
 
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();

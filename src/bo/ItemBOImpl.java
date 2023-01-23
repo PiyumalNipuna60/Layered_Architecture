@@ -29,4 +29,8 @@ public class ItemBOImpl {
     public boolean existItem(String code) throws SQLException, ClassNotFoundException {
         return itemDAO.exist(code);
     }
+
+    public String generateNewItemCode() throws SQLException, ClassNotFoundException {
+        return itemDAO.generateNewId();
+    }
 }
