@@ -1,6 +1,6 @@
 package controller;
 
-import bo.custom.PurchaseOrderBOImpl;
+import bo.custom.Impl.PurchaseOrderBOImpl;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
