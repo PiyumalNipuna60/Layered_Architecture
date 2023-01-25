@@ -1,4 +1,4 @@
-package bo;
+package bo.custom;
 
 import dao.custom.CustomerDAO;
 import dao.custom.Impl.CustomerDAOImpl;

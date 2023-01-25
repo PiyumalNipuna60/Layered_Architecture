@@ -1,10 +1,8 @@
 package controller;
 
-import bo.ItemBOImpl;
+import bo.custom.ItemBOImpl;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
-import dao.custom.Impl.ItemDAOImpl;
-import dao.custom.ItemDAO;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
