@@ -1,5 +1,6 @@
 package controller;
 
+import bo.custom.Impl.CustomerBO;
 import bo.custom.Impl.CustomerBOImpl;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
@@ -41,6 +42,7 @@ public class ManageCustomersFormController {
     public JFXButton btnAddNewCustomer;
 
 //    private CustomerDAO customerDAO = new CustomerDAOImpl();
+        CustomerBO customerBO = new CustomerBOImpl();
 
     public void initialize() {
 
@@ -77,7 +79,7 @@ public class ManageCustomersFormController {
         /*Get all customers*/
         try {
 
-            CustomerBOImpl customerBO = new CustomerBOImpl();
+
 //            ArrayList<CustomerDTO> allCustomer = customerDAO.getAll();
             ArrayList<CustomerDTO> allCustomer = customerBO.getAllCustomer();
 
@@ -156,7 +158,6 @@ public class ManageCustomersFormController {
                 //  CustomerDAOImpl customerDAO = new CustomerDAOImpl();
 //                customerDAO.save(new CustomerDTO(id,name,address));
 
-                CustomerBOImpl customerBO = new CustomerBOImpl();
                 customerBO.saveCustomer(new CustomerDTO(id,name,address));
 
                 tblCustomers.getItems().add(new CustomerTM(id, name, address));
@@ -178,7 +179,6 @@ public class ManageCustomersFormController {
                 //   CustomerDAO customerDAO=new CustomerDAOImpl();
 //                customerDAO.Update(new CustomerDTO(name, address, id));
 
-                CustomerBOImpl customerBO = new CustomerBOImpl();
                 customerBO.updateCustomer(new CustomerDTO(name, address, id));
 
             } catch (SQLException e) {
@@ -205,7 +205,6 @@ public class ManageCustomersFormController {
 
         ///   CustomerDAO customerDAO=new CustomerDAOImpl();
 //        return customerDAO.exist(id);
-        CustomerBOImpl customerBO = new CustomerBOImpl();
         return customerBO.existCustomer(id);
     }
 
@@ -220,7 +219,7 @@ public class ManageCustomersFormController {
 
             //   CustomerDAO customerDAO=new CustomerDAOImpl();
 //            customerDAO.Delete(id);
-            CustomerBOImpl customerBO = new CustomerBOImpl();
+
             customerBO.deleteCustomer(id);
 
             tblCustomers.getItems().remove(tblCustomers.getSelectionModel().getSelectedItem());
@@ -248,7 +247,7 @@ public class ManageCustomersFormController {
 
             //   CustomerDAO customerDAO=new CustomerDAOImpl();
 //            return customerDAO.generateNewId();
-            CustomerBOImpl customerBO = new CustomerBOImpl();
+
             return customerBO.generateCustomerNewId();
 
         } catch (SQLException e) {
