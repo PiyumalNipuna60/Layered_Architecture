@@ -1,5 +1,6 @@
 package controller;
 
+import bo.custom.Impl.PurchaseOrderBO;
 import bo.custom.Impl.PurchaseOrderBOImpl;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -33,10 +34,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-/**
- * @author : Sanu Vithanage
- * @since : 0.1.0
- **/
 
 public class PlaceOrderFormController {
 
@@ -54,7 +51,7 @@ public class PlaceOrderFormController {
     public Label lblId;
     public Label lblDate;
     public Label lblTotal;
-    PurchaseOrderBOImpl purchaseOrderBO = new PurchaseOrderBOImpl();
+    PurchaseOrderBO purchaseOrderBO = new PurchaseOrderBOImpl();
 
     //    CustomerDAO customerDAO = new CustomerDAOImpl();
 //    ItemDAO itemDAO = new ItemDAOImpl();
@@ -457,9 +454,9 @@ public class PlaceOrderFormController {
 //        }
 //        return false;
 
-        PurchaseOrderBOImpl purchaseOrderBOU = new PurchaseOrderBOImpl();
+
         try {
-            return purchaseOrderBOU.purchaseOrder(orderId, orderDate, customerId, orderDetails);
+            return purchaseOrderBO.purchaseOrder(orderId, orderDate, customerId, orderDetails);
         } catch (SQLException | ClassNotFoundException throwables) {
             throwables.printStackTrace();
         }

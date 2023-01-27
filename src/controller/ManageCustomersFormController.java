@@ -26,10 +26,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * @author : Sanu Vithanage
- * @since : 0.1.0
- **/
 
 public class ManageCustomersFormController {
     public AnchorPane root;
