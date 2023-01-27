@@ -1,4 +1,4 @@
 package bo.custom.Impl;
 
-public interface A {
+public interface CustomerBO {
 }
