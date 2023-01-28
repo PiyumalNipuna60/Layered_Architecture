@@ -1,4 +1,4 @@
-package bo.custom.Impl;
+package bo.custom;
 
 import model.ItemDTO;
 

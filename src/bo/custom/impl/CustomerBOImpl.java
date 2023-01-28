@@ -1,5 +1,6 @@
-package bo.custom.Impl;
+package bo.custom.impl;
 
+import bo.custom.CustomerBO;
 import dao.custom.CustomerDAO;
 import dao.custom.Impl.CustomerDAOImpl;
 import model.CustomerDTO;
@@ -7,7 +8,7 @@ import model.CustomerDTO;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class CustomerBOImpl implements CustomerBO{
+public class CustomerBOImpl implements CustomerBO {
     private CustomerDAO customerDAO = new CustomerDAOImpl();
 
     @Override

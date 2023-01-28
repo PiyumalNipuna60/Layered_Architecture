@@ -1,5 +1,6 @@
-package bo.custom.Impl;
+package bo.custom.impl;
 
+import bo.custom.ItemBO;
 import dao.custom.Impl.ItemDAOImpl;
 import dao.custom.ItemDAO;
 import model.ItemDTO;
@@ -7,7 +8,7 @@ import model.ItemDTO;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class ItemBOImpl implements ItemBO{
+public class ItemBOImpl implements ItemBO {
     private final ItemDAO itemDAO = new ItemDAOImpl();
 
     @Override
