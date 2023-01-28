@@ -6,7 +6,7 @@ import model.CustomerDTO;
 import java.sql.*;
 import java.util.ArrayList;
 
-public interface CrudDAO<T,ID> {
+public interface CrudDAO<T,ID>{
 
     public ArrayList<T> getAll() throws SQLException, ClassNotFoundException;
 

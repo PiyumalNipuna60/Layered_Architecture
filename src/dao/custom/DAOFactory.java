@@ -1,5 +1,7 @@
 package dao.custom;
 
+import dao.custom.Impl.*;
+
 public class DAOFactory {
     private static DAOFactory daoFactory;
 
@@ -18,18 +20,20 @@ public class DAOFactory {
         CUSTOMER,ITEM,ORDER,ORDERDETAILS,QUERYDAO
     }
 
-    public void getDAO(DAOTypes types){
+    public Object getDAO(DAOTypes types){
         switch (types){
             case CUSTOMER:
-                return;
+                return new CustomerDAOImpl();
             case ITEM:
-                return;
+                return new ItemDAOImpl();
             case ORDER:
-                return;
+                return new OrderDAOImpl();
             case ORDERDETAILS:
-                return;
+                return new OrderDetailsDAOImpl();
             case QUERYDAO:
-                return;
+                return new QueryDAOImpl();
+            default:
+                return null;
         }
     }
 }
