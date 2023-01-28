@@ -1,7 +1,7 @@
 package controller;
 
+import bo.BOFactory;
 import bo.custom.CustomerBO;
-import bo.custom.impl.CustomerBOImpl;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.application.Platform;
@@ -38,7 +38,9 @@ public class ManageCustomersFormController {
     public JFXButton btnAddNewCustomer;
 
 //    private CustomerDAO customerDAO = new CustomerDAOImpl();
-        CustomerBO customerBO = new CustomerBOImpl();
+//        CustomerBO customerBO = new CustomerBOImpl();
+
+    CustomerBO customerBO = (CustomerBO) BOFactory.getBoFactory().getBO(BOFactory.BOType.CUSTOMER);
 
     public void initialize() {
 

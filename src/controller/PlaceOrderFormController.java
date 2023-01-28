@@ -1,7 +1,7 @@
 package controller;
 
+import bo.BOFactory;
 import bo.custom.PurchaseOrderBO;
-import bo.custom.impl.PurchaseOrderBOImpl;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
@@ -51,9 +51,11 @@ public class PlaceOrderFormController {
     public Label lblId;
     public Label lblDate;
     public Label lblTotal;
-    PurchaseOrderBO purchaseOrderBO = new PurchaseOrderBOImpl();
+//    PurchaseOrderBO purchaseOrderBO = new PurchaseOrderBOImpl();
 
-    //    CustomerDAO customerDAO = new CustomerDAOImpl();
+    PurchaseOrderBO purchaseOrderBO = (PurchaseOrderBO) BOFactory.getBoFactory().getBO(BOFactory.BOType.purchase_order);
+
+//    CustomerDAO customerDAO = new CustomerDAOImpl();
 //    ItemDAO itemDAO = new ItemDAOImpl();
 //    OrderDAO orderDAO = new OrderDAOImpl();
 //    OrderDetailsDAO orderDetailsDAO = new OrderDetailsDAOImpl();
