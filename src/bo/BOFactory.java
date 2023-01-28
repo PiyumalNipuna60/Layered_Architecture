@@ -18,7 +18,7 @@ public class BOFactory {
         return boFactory;
     }
 
-    public static Object getBO(BOType type) {
+    public static SuoerBO getBO(BOType type) {
         switch (type) {
             case CUSTOMER:
                 return new CustomerBOImpl();
