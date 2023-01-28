@@ -1,4 +1,4 @@
 package dao;
 
-public class SuperDAO {
+public interface SuperDAO {
 }
