@@ -1,4 +1,4 @@
-package dao.custom;
+package dao;
 
 import dao.custom.Impl.*;
 
@@ -20,7 +20,7 @@ public class DAOFactory {
         CUSTOMER,ITEM,ORDER,ORDERDETAILS,QUERYDAO
     }
 
-    public Object getDAO(DAOTypes types){
+    public SuperDAO getDAO(DAOTypes types){
         switch (types){
             case CUSTOMER:
                 return new CustomerDAOImpl();
